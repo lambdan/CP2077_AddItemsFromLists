@@ -1,2 +1,0 @@
-Stockings (face replacer)=Items.Visor_02_basic_01
-Abc 123 Test=Items.Visor_02_basic_02
