@@ -29,7 +29,6 @@ registerForEvent('onInit', function()
             end
         end
     end
-
 end)
 
 registerForEvent("onOverlayOpen", function()
@@ -167,7 +166,10 @@ function ParseItemList(filename)
 
             if LEX.stringStarts(line, "Game.AddToInventory") then
                 -- parse game add inventory cmd mode
-                local x = string.match(line, '"(.-)"')
+                local x = string.match(line, '"(.-)"') -- item name between "double quotes"
+                if string.find(line, "'") then
+                    x = string.match(line, "'(.-)'") -- item name between 'single quotes'
+                end
                 entry.name = x
                 entry.itemcode = x
 
