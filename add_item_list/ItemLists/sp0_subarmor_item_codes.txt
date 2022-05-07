@@ -1,0 +1,6 @@
+Game.AddToInventory("Items.sp0subarmor0101", 1)
+Game.AddToInventory("Items.sp0subarmor0102", 1)
+Game.AddToInventory("Items.sp0subarmor0103", 1)
+Game.AddToInventory("Items.sp0subarmor0104", 1)
+Game.AddToInventory("Items.sp0subarmor0105", 1)
+Game.AddToInventory("Items.sp0subarmor0106", 1)

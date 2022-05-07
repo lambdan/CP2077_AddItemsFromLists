@@ -1,9 +1,17 @@
-Items.Rockerboy_01_Set_Boots
-Items.Rockerboy_01_Set_Glasses
-Items.Rockerboy_01_Set_Jacket
-Items.Rockerboy_01_Set_Pants
-Items.Rockerboy_01_Set_TShirt
-Items.SamuraiWorldTour_TShirt
+# from https://www.vg247.com/cyberpunk-2077-console-commands
+Johnny's tank top=Items.Q005_Johnny_Shirt
+Johnny's trousers=Items.Q005_Johnny_Pants
+Johnny's boots=Items.Q005_Johnny_Shoes
+Johnny's aviator shades=Items.Q005_Johnny_Glasses
+Johnny's Samurai band jacket=Items.SQ031_Samurai_Jacket
+Johnny's pistol (Malorian Arms 3516)=Items.Preset_Silverhand_3516
 
-# Malorian arms
-Items.Preset_Silverhand_3516
+
+Rocker Boots=Items.Rockerboy_01_Set_Boots
+Rocker Glasses=Items.Rockerboy_01_Set_Glasses
+Rocker Jacket=Items.Rockerboy_01_Set_Jacket
+Rocker Pants/Shorts=Items.Rockerboy_01_Set_Pants
+Rocker T-shirt=Items.Rockerboy_01_Set_TShirt
+
+Samurai World Tour T-shirt=Items.SamuraiWorldTour_TShirt
+
