@@ -1,0 +1,9 @@
+Items.Rockerboy_01_Set_Boots
+Items.Rockerboy_01_Set_Glasses
+Items.Rockerboy_01_Set_Jacket
+Items.Rockerboy_01_Set_Pants
+Items.Rockerboy_01_Set_TShirt
+Items.SamuraiWorldTour_TShirt
+
+# Malorian arms
+Items.Preset_Silverhand_3516

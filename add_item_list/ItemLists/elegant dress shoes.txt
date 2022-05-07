@@ -1,0 +1,12 @@
+
+
+# dress https://www.nexusmods.com/cyberpunk2077/mods/4464
+Items.Dress_01_rich_01
+
+# shoes https://www.nexusmods.com/cyberpunk2077/mods/4347
+Items.FormalShoes_01_basic_01
+Items.FormalShoes_01_basic_02
+Items.FormalShoes_01_basic_03
+Items.FormalShoes_01_rich_01
+Items.FormalShoes_01_rich_02
+

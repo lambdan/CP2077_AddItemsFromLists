@@ -1,0 +1,12 @@
+Items.CommonMaterial1
+Items.UncommonMaterial1
+Items.RareMaterial1
+Items.RareMaterial2
+Items.EpicMaterial1
+Items.EpicMaterial2
+Items.LegendaryMaterial1
+Items.LegendaryMaterial2
+Items.QuickHackUncommonMaterial1
+Items.QuickHackRareMaterial1
+Items.QuickHackEpicMaterial1
+Items.QuickHackLegendaryMaterial1
