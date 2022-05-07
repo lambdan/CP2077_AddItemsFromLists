@@ -1,11 +1,16 @@
 local MOD_METADATA = {
     name = "Add Items from Lists",
-    version = "1.0",
+    version = "1.1",
     date = "2022-05-07"
+}
+
+local MOD_SETTINGS = {
+    lastUsedList = nil
 }
 
 local LEX = require("Modules/LuaEX.lua")
 
+local settingsFile = "settings.1.1.json"
 local listsFolder = "ItemLists/" -- end with a slash
 local itemLists = {}
 local dropdownSelection = 0
@@ -13,7 +18,18 @@ local dropdownSelectionSub = 0
 local listSelected = 0
 
 registerForEvent('onInit', function()
+    loadSettings()
     itemLists = refreshItemLists()
+
+    if MOD_SETTINGS.lastUsedList then
+        for k,v in pairs(itemLists) do
+            if v.name == MOD_SETTINGS.lastUsedList then
+                dropdownSelection = k - 1
+                listSelected = k
+            end
+        end
+    end
+
 end)
 
 registerForEvent("onOverlayOpen", function()
@@ -45,6 +61,9 @@ registerForEvent("onDraw", function()
             dropdownSelection = ImGui.Combo("Item Lists", dropdownSelection, entriesForList, LEX.tableLen(entriesForList), 5)
             if ImGui.Button("Select") then
                 listSelected = dropdownSelection + 1 -- +1 because imgui starts tables at 0, lua starts at 1
+
+                MOD_SETTINGS.lastUsedList = itemLists[listSelected].name
+                saveSettings() -- save last used
             end
         else
             listSelected = 0
@@ -153,10 +172,12 @@ function ParseItemList(filename)
                 fields = LEX.strSplit(line, "=")
                 entry.name = fields[1]
                 entry.itemcode = fields[2]
+
             else
                 -- standard one item per line mode
                 entry.name = line
                 entry.itemcode = line
+
             end
 
             if entry.name and entry.itemcode then
@@ -207,5 +228,30 @@ function refreshItemLists()
         end
     end
 
+
+
+
+
     return lists
+end
+
+function saveSettings()
+    local file = io.open(settingsFile, "w")
+    local j = json.encode(MOD_SETTINGS)
+    file:write(j)
+    file:close()
+end
+
+function loadSettings()
+    if not LEX.fileExists(settingsFile) then
+        return false
+    end
+
+    local file = io.open(settingsFile, "r")
+    local j = json.decode(file:read("*a"))
+    file:close()
+
+    MOD_SETTINGS = j
+
+    return true
 end
