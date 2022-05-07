@@ -72,7 +72,7 @@ function LEX.basename(s)
     end
 end
 
-function LEX.strSplit (inputstr, sep)
+function LEX.strSplit (inputstr, sep) -- https://stackoverflow.com/a/7615129
     if sep == nil then
             sep = "%s"
     end
