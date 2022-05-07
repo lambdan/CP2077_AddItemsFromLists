@@ -53,34 +53,41 @@ registerForEvent("onDraw", function()
 
         if listSelected > 0 then
             ImGui.Separator()
+
             local list = itemLists[listSelected]
+
+            entriesForList = {}
+            for k,v in pairs(list.items) do
+                table.insert(entriesForList, v.name)
+            end
+
             ImGui.Text(list.name .. " (" .. tostring(list.amount) ..  " items):")
 
-            dropdownSelectionSub = ImGui.Combo("Items", dropdownSelectionSub, list.items, list.amount, 5)
+            dropdownSelectionSub = ImGui.Combo("Items", dropdownSelectionSub, entriesForList, list.amount, 5)
             if ImGui.Button("Add 1x") then
-                addItem(list.items[dropdownSelectionSub + 1], 1, true)
+                addItem(list.items[dropdownSelectionSub + 1].itemcode, 1, true)
             end
             ImGui.SameLine()
             if ImGui.Button("Add 10x") then
-                addItem(list.items[dropdownSelectionSub + 1], 10, true)
+                addItem(list.items[dropdownSelectionSub + 1].itemcode, 10, true)
             end
             ImGui.SameLine()
             if ImGui.Button("Add 100x") then
-                addItem(list.items[dropdownSelectionSub + 1], 100, true)
+                addItem(list.items[dropdownSelectionSub + 1].itemcode, 100, true)
             end
 
             ImGui.Text("")
 
             if ImGui.Button("Add all items in list to inventory,\n EXCLuding items you already have") then
                 for a,b in pairs(list.items) do
-                    addItem(b, 1, false)
+                    addItem(b.itemcode, 1, false)
                 end
             end
 
 
             if ImGui.Button("Add all items in list to inventory,\n INCLuding items you already have") then
                 for a,b in pairs(list.items) do
-                    addItem(b, 1, true)
+                    addItem(b.itemcode, 1, true)
                 end
             end
 
@@ -123,15 +130,40 @@ function playerHasItem(name) -- cant remember where i got this from
 end
 
 function ParseItemList(filename)
+    --print("Parsing", filename)
     local file = io.open(filename,"r")
     local lines = file:lines()
     local items = {}
     
     for line in lines do
         if (line ~= "") and (not LEX.stringStarts(line,"#")) and (not LEX.stringStarts(line,"//")) then
-            if not LEX.tableHasValue(items, line) then
-                table.insert(items, line)
+            local entry = {
+                name = nil,
+                itemcode = nil
+            }
+
+            if LEX.stringStarts(line, "Game.AddToInventory") then
+                -- parse game add inventory cmd mode
+                local x = string.match(line, '"(.-)"')
+                entry.name = x
+                entry.itemcode = x
+
+            elseif string.find(line, "=") then
+                -- display name mode
+                fields = LEX.strSplit(line, "=")
+                entry.name = fields[1]
+                entry.itemcode = fields[2]
+            else
+                -- standard one item per line mode
+                entry.name = line
+                entry.itemcode = line
             end
+
+            if entry.name and entry.itemcode then
+                --print("inserting", entry.name, entry.itemcode)
+                table.insert(items, entry)
+            end
+
         end
     end
 
