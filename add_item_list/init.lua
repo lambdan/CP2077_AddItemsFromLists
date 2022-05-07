@@ -51,7 +51,7 @@ registerForEvent("onDraw", function()
         ImGui.Separator()
 
         if LEX.tableLen(itemLists) > 0 then
-            -- make list
+            -- make list for dropdown
             entriesForList = {}
             for k,v in pairs(itemLists) do
                 s = v.name .. " (" .. tostring(v.amount) .. " items)"
@@ -108,6 +108,10 @@ registerForEvent("onDraw", function()
                 for a,b in pairs(list.items) do
                     addItem(b.itemcode, 1, true)
                 end
+            end
+
+            if list.amount > 1000 then
+                ImGui.TextColored(1,1,0,1, "Whoa, this is a big list! The game might lock up for\na while if you add all items from it.")
             end
 
             ImGui.Separator()
@@ -227,10 +231,6 @@ function refreshItemLists()
             table.insert(lists, entry)
         end
     end
-
-
-
-
 
     return lists
 end

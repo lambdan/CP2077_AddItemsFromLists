@@ -1,1 +1,0 @@
-Game.AddToInventory("Items.FormalShirt_01_basic_01", 1)
